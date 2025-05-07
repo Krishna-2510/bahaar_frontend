@@ -4,20 +4,21 @@ import { AuthenticationPage } from './screens/AuthenticationPage';
 import { GardenDetails } from './screens/GardenDetails';
 import { LandingPage } from './screens/LandingScreen';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter } from 'react-router-dom';
 import { PlantDetails } from './screens/PlantDetails';
 
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
         <Routes>
-            <Route path='bahaar' element={<LandingPage/>}/>
-            <Route path='bahaar/authentication' element={<AuthenticationPage/>}/>
-            <Route path='bahaar/account' element={<Account/>}/>
-            <Route path='bahaar/garden' element={<GardenDetails/>}/>
-            <Route path='bahaar/plant' element={<PlantDetails/>}/>
+            <Route path='/' element={<LandingPage/>}/>
+            <Route path='/authentication' element={<AuthenticationPage/>}/>
+            <Route path='/account' element={<Account/>}/>
+            <Route path='/garden' element={<GardenDetails/>}/>
+            <Route path='/plant' element={<PlantDetails/>}/>
         </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
