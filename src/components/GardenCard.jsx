@@ -137,7 +137,7 @@ export const GardenCard = ({ garden, edit, gardenAdded, setNotification, refresh
                         <br />
                         <MyButton text={'Add plant'} Icon={<AddIcon fontSize="medium" />} width={'150px'} action = {(e) => {
                             e.stopPropagation();
-                            navigate('/bahaar/garden', {state: {garden, edit: true}})
+                            navigate('/garden', {state: {garden, edit: true}})
                         }} />
                         <StyledDelete><DeleteIcon htmlColor="white" onClick={(e) => {
                             e.stopPropagation()

@@ -9,9 +9,9 @@ export const LandingPage = () => {
     const navigate = useNavigate();
     const handleClick = () => {
         if(userLoggedIn)
-            navigate('/bahaar/account')
+            navigate('/account')
         else
-            navigate('/bahaar/authentication')
+            navigate('/authentication')
     }
     return(
         <FullLandingScreen>

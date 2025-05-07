@@ -76,7 +76,7 @@ export const LoginForm = ({ toggleLogin }) => {
     }
 
     const loadLandingPage = () => {
-        navigate('/bahaar/account');
+        navigate('/account');
     }
 
     return (

@@ -142,7 +142,7 @@ export const PlantCard = ({ plant, gardenId, edit, plantAdded, refreshPlants, se
    }
 
    const loadPlantDetails = (plant) => {
-    navigate('/bahaar/plant', {state: { plant, image: imagesrc }})
+    navigate('/plant', {state: { plant, image: imagesrc }})
 }
 
 
