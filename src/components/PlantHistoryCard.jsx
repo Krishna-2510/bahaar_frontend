@@ -37,7 +37,7 @@ export const PlantHistoryCard = ({ plant, isActive, onClick, gardenId, edit, pla
     const handleDelete = async () => {
         try{
            const res = await axios.delete(`${apiendpoint}/deletePlant/${gardenId}/${plant.id}`);
-           console.log("After res = ", res);
+
            refreshPlants(true);
            setNotification({
                show: true,

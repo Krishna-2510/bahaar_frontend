@@ -11,9 +11,9 @@ export const Navbar = () => {
     <StyledLogoContainer>
     </StyledLogoContainer>
     {userLoggedIn ? 
-        <Link to={'/bahaar/account'}><PersonIcon  fontSize="large"  htmlColor="white"/></Link>
+        <Link to={'/account'}><PersonIcon  fontSize="large"  htmlColor="white"/></Link>
         :
-        <Link to={'/bahaar/authentication'}><LoginIcon  fontSize="large"  htmlColor="white"/></Link>
+        <Link to={'/authentication'}><LoginIcon  fontSize="large"  htmlColor="white"/></Link>
     }
     </StyledNav>
     )

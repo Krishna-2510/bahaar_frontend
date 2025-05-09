@@ -14,8 +14,8 @@ import Spinner from "./Spinner";
 
 export const PlantCard = ({ plant, gardenId, edit, plantAdded, refreshPlants, setNotification }) => {
     
-    //console.log('GARDEN ID =', gardenId)
 
+    
     const navigate = useNavigate();
 
     const [imagesrc, setImagesrc] = useState('');
@@ -91,7 +91,6 @@ export const PlantCard = ({ plant, gardenId, edit, plantAdded, refreshPlants, se
 
     const handleSave = async () => {
 
-        console.log("THIS IS THE DATA = ", plantInput, 'And this is the gerden id ', gardenId)
         if(handleEmptyCheck()){
             try {
                 const formData = new FormData();
@@ -109,7 +108,7 @@ export const PlantCard = ({ plant, gardenId, edit, plantAdded, refreshPlants, se
                     }
                 });
                 
-                plantAdded(false);
+                refreshPlants(true);
                 setTimeout(() => {
                     setNotification({
                         show: true,

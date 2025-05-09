@@ -41,7 +41,7 @@ export const LoginForm = ({ toggleLogin }) => {
 
     }
     const handleLogin = async () => {
-        console.log("Inside fn with data =", { 'email': email, 'password': password });
+
         setShowinitialtext(false);
         if(handleCheck()){
             setApiresponse({
@@ -52,7 +52,6 @@ export const LoginForm = ({ toggleLogin }) => {
             try {
                 const response = await axios.post(`${apiendpoint}/signin`,
                     { 'email': email, 'password': password });
-                console.log("RES=", response);
                 setApiresponse({
                     data: response.data.user,
                     loading: false,

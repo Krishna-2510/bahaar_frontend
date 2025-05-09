@@ -4,7 +4,6 @@ export const getTodaysDate = () => {
 }
 
 export const calculateAge = (birthDateStr) => {
-    //console.log("BITHDATESTR = ", birthDateStr)
     if(birthDateStr === undefined)
         return;
     // Parse the input date string

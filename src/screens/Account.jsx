@@ -55,12 +55,6 @@ export const Account = () => {
         }
     }
 
-    useEffect(() => {
-        console.log("Inside the use effect addingnewgarden = ", addingNewGarden);
-        if (!addingNewGarden)
-            getGardens()
-    }, [addingNewGarden]);
-
     const closed = () => {
         setNotificationDetails({
             ...notificationDetails,
@@ -72,6 +66,10 @@ export const Account = () => {
         if (refreshGardens)
             getGardens();
     }, [refreshGardens]);
+
+    useEffect(() => {
+            getGardens();
+    }, []);
 
     const loadGardenDetails = (garden) => {
         navigate('/garden', { state: { garden, edit: false } })

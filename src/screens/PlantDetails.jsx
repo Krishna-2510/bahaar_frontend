@@ -34,6 +34,7 @@ export const PlantDetails = () => {
         loading: false,
         error: false
     });
+    const [imageLoading, setImageLoading] = useState(false);
     const [currPlant, setCurrPlant] = useState(apiResponse.data?.[0]);
     const [refreshPlants, setRefreshPlants] = useState(false);
     const [notificationDetails, setNotificationDetails] = useState({
@@ -52,7 +53,6 @@ export const PlantDetails = () => {
 
     useEffect(() => {
         if (refreshPlants) {
-            console.log("Set refresh palnts has been set to true calling getPlants")
             getAllPlants();
             setRefreshPlants(false);
         }
@@ -66,19 +66,21 @@ export const PlantDetails = () => {
     }, [currPlant]);
 
     const fetchImage = async () => {
+        setImageLoading(true);
         try {
             const newurl = currPlant.imageUrl.replace("http://localhost:8080", apiendpoint)
             const response = await axios.get(newurl);
             const base64Image = `data:image/jpeg;base64,${response.data.data}`;
             setCurrImage(base64Image);
+            setImageLoading(false);
         }
         catch (e) {
             console.log(e);
+            setImageLoading(false);
         }
     };
 
     const getAllPlants = async () => {
-        console.log("Inside getALl PLants")
         setApiResponse({
             ...apiResponse,
             loading: true
@@ -105,9 +107,7 @@ export const PlantDetails = () => {
     }
 
     const loadNext = (dir) => {
-        console.log("Inside this function with dir = ", dir, "currInd = ", currInd, " length = ", apiResponse.data.length)
         const nextInd = (currInd + dir + apiResponse.data.length) % (apiResponse.data.length);
-        console.log('This is the next index:', nextInd)
         setIsVisible(false);
         setCurrInd(nextInd);
         setCurrPlant(apiResponse.data[nextInd]);
@@ -119,7 +119,6 @@ export const PlantDetails = () => {
     }
 
     useEffect(() => {
-        // console.log("INSIDE EFFECT currIND changed")
         const timer = setTimeout(() => {
             setIsVisible(true);
         }, 100);
@@ -129,10 +128,8 @@ export const PlantDetails = () => {
 
     const handleOnClick = (ind) => {
         if (ind != currInd) {
-            // console.log("Index here is equals to = ", ind, ' and allplants  = ', allPlants);
             setIsVisible(false);
             setCurrInd(ind);
-            console.log("CURR = ", apiResponse.data[ind]);
             setCurrPlant(apiResponse.data[ind]);
         }
     }
@@ -159,11 +156,6 @@ export const PlantDetails = () => {
         }
     };
 
-    // useEffect(() => {
-    //     console.log('ALL PLANTS CHANGED = ', allPlants)
-    //     if(refreshPlants && allPlants.length === 0)
-    //         navigate('/bahaar/garden')
-    // },[allPlants])
 
     const handleEmptyCheck = () => {
         if(plantInput.plantName.trim() === '' || !plantInput.imageFile || plantInput.fertilizer === 'Select an option' || plantInput.note === '' || plantInput.sunlight === 'Select an option' || plantInput.water === 'Select an option' || plantInput.sunlight === 'Select an option'){
@@ -181,10 +173,6 @@ export const PlantDetails = () => {
     }
 
     const handleSave = async () => {
-
-        console.log("PLANT INPUT + ", plantInput)
-
-        // console.log("THIS IS THE DATA = ", plantInput, 'And this is the gerden id ', gardenId)
         if(handleEmptyCheck()){
             try {
                 const formData = new FormData();
@@ -204,9 +192,6 @@ export const PlantDetails = () => {
     
                 const newPlant = response.data; // Adjust based on your API response
     
-                // Update allPlants state directly
-                //setAllPlants(prevPlants => [newPlant, ...prevPlants]);
-                //setCurrPlant(newPlant); // Optionally set current plant to the new one
                 setAddingNewPlant(false);
                 setRefreshPlants(true);
                 setPlantInput({
@@ -219,15 +204,6 @@ export const PlantDetails = () => {
                 })
                 setImageName('')
     
-                // plantAdded(false);
-                // setTimeout(() => {
-                //     setNotification({
-                //         show: true,
-                //         variant: 'success',
-                //         message: 'new plant added'
-                //     });
-                //     window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
-                // }, '500');
             }
             catch (e) {
                 console.log(e);
@@ -345,7 +321,7 @@ export const PlantDetails = () => {
                                         <MyButton text={'Cancel'} Icon={<CancelIcon fontSize="medium" />} width={'120px'} action={() => handleCancel()} />
                                         {/* </p> */}
                                     </PlantDataContainer>}
-                                {!addingNewPlant ? <StyledPlantDetailsImage src={currImage} alt="Money Plant" />
+                                {!addingNewPlant ? imageLoading ? <div style={{display: 'flex', width: '50%', margin: '120px auto'}}><Spinner width={'100px'}/></div> : <StyledPlantDetailsImage src={currImage} alt="Money Plant" />
                                     :
                                     <GardenEmptyImgContainer width='50%'>
                                         <MyButton text={imageName ? imageName : 'Add image'} Icon={<InsertPhotoIcon fontSize="medium" />} width={'150px'} action={handleClick}></MyButton>

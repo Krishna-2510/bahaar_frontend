@@ -49,3 +49,4 @@ export const fertilizerMapping = {
 }
 
 export const apiendpoint = "https://bahaar.onrender.com"
+// export const apiendpoint = "http://localhost:8080"

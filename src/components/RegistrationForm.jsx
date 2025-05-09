@@ -42,7 +42,7 @@ export const RegistrationForm = ({toggleLogin}) => {
     }
 
     const handleRegister = async() => {
-        // console.log("Inside fn with data =", {'name': fullName, 'email':email , 'password': password});
+
         setShowinitialtext(false);
         if(handleCheck()){
             setApiResponse({
@@ -52,7 +52,7 @@ export const RegistrationForm = ({toggleLogin}) => {
             try{
                 const response = await axios.post(`${apiendpoint}/register`, 
                 {'name': fullName, 'email':email , 'password': password});
-                // console.log("RES=", response);
+
                 setApiResponse({
                     ...apiResponse,
                     loading: false,

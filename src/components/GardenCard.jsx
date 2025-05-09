@@ -26,7 +26,6 @@ export const GardenCard = ({ garden, edit, gardenAdded, setNotification, refresh
     const fetchImage = async () => {
         setLoading(true);
         try {
-            // console.log("IMAGE URL = ", garden.imageUrl)
             const newurl = garden.imageUrl.replace("http://localhost:8080", apiendpoint)
             const response = await axios.get(newurl);
             const base64Image = `data:image/jpeg;base64,${response.data.data}`;
@@ -92,6 +91,7 @@ export const GardenCard = ({ garden, edit, gardenAdded, setNotification, refresh
                 });
                 
                 gardenAdded(false);
+                refreshGardens(true);
                 setTimeout(() => {
                     setNotification({
                         show: true,
@@ -110,7 +110,6 @@ export const GardenCard = ({ garden, edit, gardenAdded, setNotification, refresh
     const handleDelete = async () => {
          try{
             const res = await axios.delete(`${apiendpoint}/deleteGarden/${garden.id}`);
-            console.log("After res = ", res);
             refreshGardens(true);
             setNotification({
                 show: true,

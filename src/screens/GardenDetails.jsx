@@ -31,7 +31,6 @@ export const GardenDetails = () => {
 
     useEffect(() => {
         if (isEdit) {
-            console.log("Cane here ---------")
             setAddingNewPlant(true);
         }
     }, [isEdit])
@@ -40,24 +39,18 @@ export const GardenDetails = () => {
         window.scrollTo(0, 0);
     }, [refreshPlants])
 
-    useEffect(() => {
-        console.log("Change: adding = ", addingNewPlant)
-        if (!addingNewPlant) {
-            console.log("Raeched here in second useEffect")
-            getPlants();
-        }
-    }, [addingNewPlant]);
 
     useEffect(() => {
-        console.log("Change: refreshPlants = ", refreshPlants)
         if (refreshPlants) {
-            console.log("Raeched here in firts useEffect")
             getPlants();
         }
     }, [refreshPlants]);
 
+    useEffect(() => {
+        getPlants();
+    },[])
+
     const getPlants = async () => {
-        console.log('API called')
         setApiResponse({
             ...apiResponse,
             loading: true

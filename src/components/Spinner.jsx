@@ -10,6 +10,14 @@ const SpinnerContainer = styled.div`
   margin: 50px auto;
 `;
 
+const StyledLoading = styled.p`
+    text-align: center;
+    margin: 5px;
+    font-family: sans-serif;
+    color: white
+}
+`
+
 const pulse = keyframes`
   0% {
     transform: scale(1);
@@ -31,9 +39,16 @@ const Spinner = ({ width, type }) => {
     <SpinnerContainer width={width}>
       {
         type == 'general' ?
-          <SpinnerImage width={width} src={plantSpinner} />
+        <>
+        <SpinnerImage width={width} src={plantSpinner} />
+        <StyledLoading>Loading...</StyledLoading>
+        </>
           :
-          <SpinnerImage width={width} src={imageSpinner} /> // type = "inline"
+          <>
+          <SpinnerImage width={width} src={imageSpinner} />
+          <StyledLoading>Loading...</StyledLoading>
+          </>
+          
       }
 
     </SpinnerContainer>
